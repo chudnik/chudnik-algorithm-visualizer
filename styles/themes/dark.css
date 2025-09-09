@@ -1,0 +1,59 @@
+/* styles/themes/dark.css */
+
+/* Эта тема уже является основной в наших стилях */
+/* Дополнительные стили для темной темы */
+
+body {
+  color: #e0e0e0;
+}
+
+.controls,
+.visualization,
+.stats,
+header {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+select,
+input {
+  color: #e0e0e0;
+}
+
+select option {
+  background: #2d3748;
+  color: #e0e0e0;
+}
+
+/* Специфические стили для темной темы */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
+}
+
+/* Индикатор текущей темы */
+.theme-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}

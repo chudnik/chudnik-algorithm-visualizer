@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #eae7dc;
+  color: #8e8d8a;
+  min-height: 100vh;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+header {
+  text-align: center;
+  padding: 30px;
+  background-color: #d8c3a5;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  color: #e85a4f;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #8e8d8a;
+  font-weight: 500;
+}
+
+.main-content {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* Анимация появления элементов */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container > * {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Задержки для анимации последовательного появления элементов */
+header {
+  animation-delay: 0.1s;
+}
+.navigation {
+  animation-delay: 0.15s;
+}
+.main-content {
+  animation-delay: 0.2s;
+}
+.stats-section {
+  animation-delay: 0.25s;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .controls,
+  .visualization {
+    min-width: 100%;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Стили для скроллбара */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(234, 231, 220, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d8c3a5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e98074;
+}
+
+/* Плавные переходы для всех интерактивных элементов */
+button,
+select,
+input,
+.nav-btn,
+.stat-item,
+.control-group {
+  transition: all 0.3s ease;
+}
+
+/* Улучшенный фокус для доступности */
+button:focus,
+select:focus,
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(233, 128, 116, 0.5);
+}
+
+/* Эффект наведения для карточек */
+.controls,
+.visualization,
+.stats-section,
+header,
+.navigation {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.controls:hover,
+.visualization:hover,
+.stats-section:hover,
+header:hover,
+.navigation:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}

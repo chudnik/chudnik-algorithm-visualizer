@@ -1,0 +1,58 @@
+.stat-item {
+  text-align: center;
+  padding: 15px;
+  flex: 1;
+  position: relative;
+  background-color: rgba(234, 231, 220, 0.7);
+  border-radius: 12px;
+  margin: 0 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.stat-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(142, 141, 138, 0.3),
+    transparent
+  );
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #e85a4f;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: #8e8d8a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* Анимация для изменяющихся значений */
+.stat-value.changed {
+  animation: highlight 0.5s ease;
+}
+
+@keyframes highlight {
+  0% {
+    color: #e85a4f;
+  }
+  50% {
+    color: #e98074;
+  }
+  100% {
+    color: #e85a4f;
+  }
+}

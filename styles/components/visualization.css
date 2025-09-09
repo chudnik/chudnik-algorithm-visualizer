@@ -1,0 +1,176 @@
+.visualization {
+  flex: 2;
+  min-width: 500px;
+  min-height: 500px;
+  background-color: #d8c3a5;
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.visualization::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 30%,
+    rgba(216, 195, 165, 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+#visualization-container,
+#tree-visualization-container,
+#graph-visualization-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(234, 231, 220, 0.3);
+}
+
+/* Стили для SVG элементов */
+.bar {
+  fill: #e98074;
+  transition: all 0.3s ease;
+  stroke: rgba(234, 231, 220, 0.5);
+  stroke-width: 1;
+  rx: 3;
+  ry: 3;
+}
+
+.bar.comparing {
+  fill: #e85a4f;
+  filter: drop-shadow(0 0 5px rgba(232, 90, 79, 0.5));
+}
+
+.bar.sorted {
+  fill: #8e8d8a;
+  transition: fill 0.5s ease;
+}
+
+.bar-value {
+  font-size: 2px;
+  fill: #eae7dc;
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Стили для визуализации дерева */
+.tree-connection {
+  stroke: #8e8d8a;
+  stroke-width: 2;
+}
+
+.tree-node-text {
+  font-size: 14px;
+  font-weight: bold;
+  fill: #eae7dc;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.tree-node-circle {
+  stroke: #8e8d8a;
+  stroke-width: 2;
+  transition: fill 0.3s ease;
+}
+
+.tree-node-circle.normal {
+  fill: #d8c3a5;
+}
+
+.tree-node-circle.highlighted {
+  fill: #e85a4f;
+}
+
+.tree-node-circle.visited {
+  fill: #e98074;
+}
+
+/* Индикатор выполнения */
+.progress-indicator {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(232, 90, 79, 0.8);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #eae7dc;
+  display: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.progress-indicator.active {
+  display: block;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+/* Сообщения о состоянии */
+.status-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(232, 90, 79, 0.9);
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #eae7dc;
+  display: none;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.status-message.visible {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Адаптивность для области визуализации */
+@media (max-width: 768px) {
+  .visualization {
+    min-width: 100%;
+    min-height: 300px;
+  }
+
+  .bar-value {
+    display: none;
+  }
+
+  .tree-node-text {
+    font-size: 12px;
+  }
+}
+
+/* Увеличиваем размер текста для больших экранов */
+@media (min-width: 1200px) {
+  .bar-value {
+    font-size: 2.5px;
+  }
+}

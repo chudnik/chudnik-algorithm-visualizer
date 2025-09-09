@@ -1,0 +1,95 @@
+.comparison-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.comparison-container h2 {
+  color: #e85a4f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.comparison-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: rgba(234, 231, 220, 0.5);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.comparison-filters label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #8e8d8a;
+}
+
+.comparison-filters input {
+  width: auto;
+  margin-right: 8px;
+}
+
+.comparison-table-container {
+  overflow-x: auto;
+  margin-bottom: 30px;
+  background-color: rgba(234, 231, 220, 0.5);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #eae7dc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #d8c3a5;
+}
+
+.comparison-table th {
+  background-color: #e98074;
+  color: #eae7dc;
+  font-weight: 600;
+}
+
+.comparison-table tr:hover {
+  background-color: rgba(216, 195, 165, 0.3);
+}
+
+.comparison-table tr[data-algorithm] {
+  transition: all 0.3s ease;
+}
+
+.comparison-table tr.hidden {
+  display: none;
+}
+
+.comparison-charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.chart-container {
+  background-color: rgba(234, 231, 220, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  min-width: 300px;
+}
+
+.chart-container h3 {
+  color: #e85a4f;
+  text-align: center;
+  margin-bottom: 15px;
+}

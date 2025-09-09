@@ -1,0 +1,30 @@
+.complexity-value {
+  position: relative;
+  cursor: help;
+}
+
+.complexity-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(234, 231, 220, 0.95);
+  border: 2px solid #e85a4f;
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 1000;
+  width: 170px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.complexity-value:hover .complexity-tooltip {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.complexity-graph {
+  display: block;
+  width: 150px;
+  height: 80px;
+}

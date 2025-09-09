@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Визуализатор алгоритмов</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components/navigation.css" />
+    <link rel="stylesheet" href="styles/components/controls.css" />
+    <link rel="stylesheet" href="styles/components/visualization.css" />
+    <link rel="stylesheet" href="styles/components/stats.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Визуализатор алгоритмов</h1>
+        <p class="subtitle">
+          Интерактивная визуализация алгоритмов: сортировки, деревья и графы
+        </p>
+      </header>
+
+      <nav class="navigation">
+        <button class="nav-btn active" data-section="sorting">
+          Сортировки
+        </button>
+        <button class="nav-btn" data-section="trees">Деревья</button>
+        <button class="nav-btn" data-section="graphs">Графы</button>
+      </nav>
+
+      <div class="main-content">
+        <!-- Секция сортировок -->
+        <div class="section active" id="sorting-section">
+          <div class="controls">
+            <div class="control-group">
+              <h3>Выбор алгоритма</h3>
+              <select id="algorithm-select">
+                <option value="bubble">Сортировка пузырьком</option>
+                <option value="selection">Сортировка выбором</option>
+                <option value="insertion">Сортировка вставками</option>
+                <option value="quick">Быстрая сортировка</option>
+                <option value="merge">Сортировка слиянием</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <h3>Настройки массива</h3>
+              <label for="array-size"
+                >Размер массива: <span id="size-value">20</span></label
+              >
+              <input type="range" id="array-size" min="5" max="50" value="20" />
+
+              <label for="speed"
+                >Скорость анимации: <span id="speed-value">5</span></label
+              >
+              <input type="range" id="speed" min="1" max="10" value="5" />
+            </div>
+
+            <div class="control-group">
+              <h3>Управление</h3>
+              <div class="button-group">
+                <button id="generate-btn">Новый массив</button>
+                <button id="start-btn">Запуск</button>
+              </div>
+              <div class="button-group">
+                <button id="pause-btn">Пауза</button>
+                <button id="step-btn">Шаг</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <h3>Описание</h3>
+              <p id="algorithm-description">
+                Сортировка пузырьком — простой алгоритм сортировки, который
+                многократно проходит через массив, сравнивает соседние элементы
+                и меняет их местами, если они находятся в неправильном порядке.
+              </p>
+            </div>
+
+            <div class="control-group complexity-group">
+              <h3>Сложность алгоритма</h3>
+              <div class="complexity-info">
+                <!-- В каждом блоке сложности добавьте такой div -->
+                <div class="complexity-item">
+                  <span class="complexity-label">Время (худший случай):</span>
+                  <span class="complexity-value" data-complexity="n^2"
+                    >O(n²)
+                    <div class="complexity-tooltip">
+                      <canvas
+                        class="complexity-graph"
+                        width="150"
+                        height="80"
+                        data-type="time"
+                        data-complexity="n^2"
+                      ></canvas>
+                    </div>
+                  </span>
+                </div>
+                <div class="complexity-item">
+                  <span class="complexity-label">Память:</span>
+                  <span id="space-complexity" class="complexity-value"
+                    >O(1)</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="visualization">
+            <div id="visualization-container"></div>
+          </div>
+        </div>
+
+        <!-- Секция деревьев -->
+        <div class="section" id="trees-section">
+          <div class="controls">
+            <div class="control-group">
+              <h3>Выбор алгоритма</h3>
+              <select id="tree-algorithm-select">
+                <option value="bst">Бинарное дерево поиска</option>
+                <option value="avl">AVL дерево</option>
+                <option value="heap">Бинарная куча</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <h3>Операции</h3>
+              <div class="button-group">
+                <button id="insert-btn">Добавить узел</button>
+                <button id="remove-btn">Удалить узел</button>
+              </div>
+              <div class="button-group">
+                <button id="search-btn">Поиск</button>
+                <button id="clear-tree-btn">Очистить</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <h3>Описание</h3>
+              <p id="tree-algorithm-description">
+                Бинарное дерево поиска — структура данных, где каждый узел имеет
+                не более двух потомков, и для каждого узла выполняется условие:
+                все значения в левом поддереве меньше, а в правом поддереве
+                больше значения в самом узле.
+              </p>
+            </div>
+
+            <div class="control-group complexity-group">
+              <h3>Сложность алгоритма</h3>
+              <div class="complexity-info">
+                <div class="complexity-item">
+                  <span class="complexity-label">Вставка:</span>
+                  <span id="tree-insert-complexity" class="complexity-value"
+                    >O(log n)</span
+                  >
+                </div>
+                <div class="complexity-item">
+                  <span class="complexity-label">Поиск:</span>
+                  <span id="tree-search-complexity" class="complexity-value"
+                    >O(log n)</span
+                  >
+                </div>
+                <div class="complexity-item">
+                  <span class="complexity-label">Удаление:</span>
+                  <span id="tree-delete-complexity" class="complexity-value"
+                    >O(log n)</span
+                  >
+                </div>
+                <div class="complexity-item">
+                  <span class="complexity-label">Память:</span>
+                  <span id="tree-space-complexity" class="complexity-value"
+                    >O(n)</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="visualization">
+            <div id="tree-visualization-container"></div>
+          </div>
+        </div>
+
+        <!-- Секция графов -->
+        <div class="section" id="graphs-section">
+          <div class="controls">
+            <div class="control-group">
+              <h3>Выбор алгоритма</h3>
+              <select id="graph-algorithm-select">
+                <option value="bfs">Поиск в ширину (BFS)</option>
+                <option value="dfs">Поиск в глубину (DFS)</option>
+                <option value="dijkstra">Алгоритм Дейкстры</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <h3>Режим редактирования</h3>
+              <div class="button-group">
+                <button id="add-node-btn">Добавить узел</button>
+                <button id="add-edge-btn">Добавить ребро</button>
+              </div>
+              <div class="button-group">
+                <button id="run-graph-btn">Запуск</button>
+                <button id="clear-graph-btn">Очистить</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <h3>Описание</h3>
+              <p id="graph-algorithm-description">
+                Поиск в ширину (BFS) — алгоритм обхода графа, который посещает
+                все узлы на текущей глубине перед переходом к узлам на следующей
+                глубине. Используется для поиска кратчайшего пути в невзвешенных
+                графах.
+              </p>
+            </div>
+
+            <div class="control-group complexity-group">
+              <h3>Сложность алгоритма</h3>
+              <div class="complexity-info">
+                <div class="complexity-item">
+                  <span class="complexity-label">Время:</span>
+                  <span id="graph-time-complexity" class="complexity-value"
+                    >O(V + E)</span
+                  >
+                </div>
+                <div class="complexity-item">
+                  <span class="complexity-label">Память:</span>
+                  <span id="graph-space-complexity" class="complexity-value"
+                    >O(V)</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="visualization">
+            <div id="graph-visualization-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Статистика для сортировок -->
+      <div class="stats-section active" id="sorting-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="comparisons">0</div>
+          <div class="stat-label">Сравнения</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="swaps">0</div>
+          <div class="stat-label">Обмены</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="iterations">0</div>
+          <div class="stat-label">Итерации</div>
+        </div>
+      </div>
+
+      <!-- Статистика для деревьев -->
+      <div class="stats-section" id="tree-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="node-count">0</div>
+          <div class="stat-label">Узлов</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="tree-height">0</div>
+          <div class="stat-label">Высота</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="tree-comparisons">0</div>
+          <div class="stat-label">Сравнения</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="tree-operations">0</div>
+          <div class="stat-label">Операции</div>
+        </div>
+      </div>
+
+      <!-- Статистика для графов -->
+      <div class="stats-section" id="graph-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="graph-nodes">0</div>
+          <div class="stat-label">Узлов</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="graph-edges">0</div>
+          <div class="stat-label">Рёбер</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="graph-operations">0</div>
+          <div class="stat-label">Операции</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Загрузка модулей приложения -->
+    <script type="module" src="scripts/app.js"></script>
+  </body>
+</html>
