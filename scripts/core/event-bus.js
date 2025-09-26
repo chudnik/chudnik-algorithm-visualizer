@@ -1,28 +1,33 @@
 class EventBus {
-  constructor() {
-    this.events = {};
-  }
-
-  on(event, callback) {
-    if (!this.events[event]) {
-      this.events[event] = [];
+    constructor() {
+        this.events = {};
+        this.callbackID = 0;
     }
-    this.events[event].push(callback);
-  }
 
-  off(event, callback) {
-    if (!this.events[event]) return;
+    publish(eventName, ...args) {
+        const callback = this.events[eventName];
+        if (!callback) {
+            return console.warn(eventName + ': событие не найдено!');
+        }
+        for (let id in callback) {
+            callback[id](...args);
+        }
+    }
 
-    this.events[event] = this.events[event].filter((cb) => cb !== callback);
-  }
-
-  emit(event, data) {
-    if (!this.events[event]) return;
-
-    this.events[event].forEach((callback) => {
-      callback(data);
-    });
-  }
+    subscribe(eventName, callback) {
+        if (!this.events[eventName]) {
+            this.events[eventName] = {};
+        }
+        const id = this.callbackID++;
+        this.events[eventName][id] = callback;
+        const unsubscribe = () => {
+            delete this.events[eventName][id];
+            if (Object.keys(this.events[eventName]).length === 0) {
+                delete this.events[eventName];
+            }
+        };
+        return {unsubscribe};
+    }
 }
 
-export default new EventBus();
+export default EventBus;
