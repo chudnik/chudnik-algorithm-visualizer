@@ -1,23 +1,42 @@
-export class StateManager {
-  constructor() {
-    this.state = {};
-    this.listeners = [];
-  }
+export const EVENT_TYPES = {
+    SYSTEM: {
+        INIT: 'system:init',
+        READY: 'system:ready',
+        ERROR: 'system:error',
+    },
 
-  setState(newState) {
-    this.state = { ...this.state, ...newState };
-    this.notifyListeners();
-  }
+    ALGORITHM: {
+        INIT: 'algorithm:init',
+        START: 'algorithm:start',
+        PAUSE: 'algorithm:pause',
+        RESUME: 'algorithm:resume',
+        STOP: 'algorithm:stop',
+        ERROR: 'algorithm:error',
+    }
+}
 
-  getState() {
-    return this.state;
-  }
+export const EVENT_SCHEMAS = {
+    [EVENT_TYPES.SYSTEM.INIT]: {
+        timestamp: 'number',
+        version: 'string',
+    }
+}
 
-  addListener(listener) {
-    this.listeners.push(listener);
-  }
-
-  notifyListeners() {
-    this.listeners.forEach((listener) => listener(this.state));
-  }
+export class EventValidator {
+    static validate(eventType, data) {
+        const schema = EVENT_SCHEMAS[eventType];
+        if (!schema) {
+            throw new Error(`No schema defined for event: ${eventType}`);
+        }
+        for (const [key, expectedType] of Object.entries(schema)) {
+            if (!(key in data)) {
+                throw new Error(`Missing required field '${key}' in event: ${eventType}`);
+            }
+            const actualType = typeof data[key];
+            if (actualType !== expectedType && expectedType !== 'any') {
+                throw new Error(`Field '${key}' must be type '${expectedType}', got ${actualType}`);
+            }
+        }
+        return true;
+    }
 }
